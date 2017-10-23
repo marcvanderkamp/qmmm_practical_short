@@ -1,0 +1,5 @@
+AuthUserFile /Theory/chmwvdk/public_html/qmmm_practical_short/secure/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Software packages (UOB download only)"
+AuthType Basic
+require valid-user

@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 1: QM/MM Simulations</H2>
+<H3>Procedure</H3>
+<HR noshade>
+
+<p>
+You will be running a QM/MM simulation of the enzyme-catalysed 
+reaction of chorismate to prephenate. The substrate (chorismate) 
+will be modelled using QM, while the enzyme (chorismate mutase) 
+and solvating water will be modelled using MM. The reaction will 
+be simulated by shortening the bond between atoms C3 and C9 of 
+chorismate, while increasing the bond length between C and O3. 
+The difference between these bond lengths will be the reaction 
+coordinate (RC). You will run a QM/MM simulation that will change 
+this reaction coordinate from -1.8 A to +1.8 A, minimising the 
+system, and then calculating the energy, for each value.
+</p>
+
+<p>
+You will be running the program on your desktop computer. The input files are
+contained in the zip file that you can download from 
+<a href="secure/qmmm.zip">here</a>.
+</p>
+
+<p>
+To unpack this file, right click on it and select "Extract". This will 
+unpack the file into your downloads directory in your O drive.
+You need to have to have enough space to unpack the files and run the practical - you will
+need at least 35 MB.
+</p>
+
+<p>
+You will be using the MSYS command line environment to run the CHARMM program and other commands during this practical.
+You can start MSYS by pressing the Start Button, followed by Run...
+</p>
+<p>
+Then type:
+</p>
+<pre>  C:/msys/1.0/msys.bat
+</pre>
+
+<p>
+In the MSYS window, change into the directory containing the files for this first part of the practical.
+If the files are in O:\Downloads\qmmm\QMMM then do this by typing;
+
+<pre>
+cd /o/Downloads/qmmm/QMMM
+</pre>
+
+Use <tt>ls</tt> to list files in this 
+directory.
+</p>
+
+<p>
+A starting structure for this practical can be found on <a href="structures.html">this page</a>. 
+This page contains several snapshot structures from a molecular dynamics simulation of 
+chorismate mutase. Each snapshot is numbered. Choose one of these snapshots (making 
+sure to choose a different number than your neighbours) and download
+the min_ts&lt;favourite number&gt;.crd and min_ts&lt;favourite number&gt;.pdb files
+to the top directory for the practical (e.g. /o/Downloads/qmmm/QMMM).
+</p>
+
+
+<p>
+The starting structures were obtained from a simulation of the 
+transition state of the enzyme-catalysed reaction. The starting 
+structure is a snapshot from that simulation. Use VMD to visualise the 
+structure of the enzyme and transition state. Do this by loading 
+the min_ts&lt;favourite number&gt;.pdb file into VMD, and use the 
+"Graphical Representations" form (under Graphics|Representations) 
+to highlight chorismate mutase (type <tt>segid MA MB MC</tt>
+into the "selected atoms" box of the "Graphical Representations" window), 
+the transition state of chorismate to prephenate (click "Create Rep" to
+create a new representation, then type <tt>segid CH</tt> into the 
+"selected atoms" box of the "Graphical Representations" window) and 
+the Arg90 residue in the active site 
+(click "Create Rep" again, and type <tt>resid 90 and within 10.0 of segid CH</tt>
+into the "selected atoms" box).  Identify the bonds 
+that correspond to the reaction coordinate.
+</p>
+
+<h3>If you need help with VMD, then please read the information on
+    the <a href="tech_vmd.html">VMD help page.</a></h3>
+
+</BODY>
+</HTML>

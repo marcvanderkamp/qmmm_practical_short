@@ -1,0 +1,154 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 1: QM/MM Simulations</H2>
+<H3>Exercise 2 - Enzyme Catalysed Reaction with QM Arg90</H3>
+<HR noshade>
+
+<p>
+You will investigate the role that Arg90 plays during the enzyme catalysed 
+reaction. You will do this by including the side chain of Arg90 within 
+the QM region of the simulation. You will then calculate the energy of the system
+for values of the reaction coordinate that correspond 
+to the transition state, the reactant and the product.
+</p>
+
+<p>
+Adding the side chain of Arg90 to the QM region will however introduce a problem.
+The problem is that part of Arg90 will be QM, while another part will be
+MM. This means that the interface between the QM and MM atoms now crosses
+a carbon-carbon bond. This means that the carbon on the QM side of the interface
+is missing its bonded atom. This carbon now does not have a full coordination 
+sphere. To remedy this, you have to refill the coordination sphere by adding
+a non-physical "link atom". This atom typically behaves like hydrogen (can
+you think why?), and it must be placed along the carbon-carbon bond.
+In this part of the practical you will add the side chain of Arg90 to
+the QM region, and will then add a link atom along the broken
+carbon-carbon bond.
+</p>
+
+<p>
+<b>qmmm_r90qm.inp</b> is a script that does calculates the energy
+of the system for the enzyme-catalysed reaction with a given 
+value of the reaction coordinate. It is now set up to run with 
+chorismate in the QM-region only. You will adjust it so that 
+it will also include the side-chain of the catalytic Arg90 in 
+the QM-region and will add a link atom along the carbon-carbon
+bond at the interface of the QM and MM regions
+(edit the file by typing "write qmmm_r90qm.inp").
+</p>
+
+<p>
+Modifications of input-script:
+
+<ul>
+<li>
+Add definition of QQ atom type (link-atom)
+</li>
+<li>
+Read in parameters for link-atom, linkatom27.prm
+</li>
+<li>
+Add link-atom between CG and CD of Arg90 
+(use the ADDLinkatom command)
+</li>
+<li>
+Add extra atoms to QUANTUM definition
+</li>
+</ul>
+</p>
+
+<p>
+This script is set up to write out a crd-file for the QM-region 
+only. You will need to modify the script so that it includes 
+Arg90 in that output. To do so, you should adjust the selection 
+for atom deletion so that the Arg90 side-chain is NOT deleted.
+</p>
+
+<h3>
+There are extensive instructions in the script that tell you
+how to perform the above modifications. Please read these
+instructions before calling for a demonstrator.
+</h3>
+
+<p>
+The instructions are all indicated by the lines that 
+start with a <tt>!! ##</tt>, e.g
+</p>
+
+<tt>
+<pre>
+!! ## Read parameters for link-atom - do this by
+!! ## uncommenting the below line. Look at this file.
+!! ## Can you work out what information is contained in 
+!! ## this file?
+</pre>
+</tt>
+
+<p>
+In this case, the line below this instruction;
+</p>
+
+<tt>
+<pre>
+!read para card name linkatom27.prm append
+</pre>
+</tt>
+
+<p>
+is commented out (all lines that start with a <tt>!</tt> are ignored
+by CHARMM - they are "commented out"). In this case, all you need to 
+do is remove the <tt>!</tt> so that CHARMM is no longer ignoring this line.
+</p>
+
+<p>
+Further down in the file you will see that you need to modify the definitions
+of the quantum regions by adding atoms. To do this you will need to get the 
+identification of the atoms you wish to add. To do this, you can use VMD. 
+Make sure you can see the Arg90 residue (by using the VMD selection
+"resid90 and within 10.0 of segid CH"). Then click "Mouse|Label|Atoms" and
+click on the atoms in the Arg90 residue that you want to model using 
+quantum mechanics. VMD will print their names. You only need the last
+part of the name, e.g. "CD" or "HH12". In the <tt>qmmm_r90qm.inp</tt> 
+script there are instructions on how to add these names to the 
+part of the file where the quantum region is defined.
+</p>
+
+<p>
+Once you have made the changes, run the simulation to calculate the energy of the 
+transition state with Arg90 in the QM-region by running;
+
+<pre>
+./charmm < qmmm_r90qm.inp > qmmm_r90qm_ts.log
+</pre>
+</p>
+
+<p>
+Now perform the same calculation for the values of the
+reaction coordinate that correspond to the reactant
+(R = -1.8) and product (R = 1.8)
+(by changing the value of "R" at the top of
+qmmm_r90qm.inp). Run charmm as above, using the commands;
+
+<pre>
+./charmm < qmmm_r90qm.inp > qmmm_r90qm_reactant.log
+</pre>
+
+and
+
+<pre>
+./charmm < qmmm_r90qm.inp > qmmm_r90qm_product.log
+</pre>
+
+</p>
+
+</BODY>
+</HTML>

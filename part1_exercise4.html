@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 1: QM/MM Simulations</H2>
+<H3>Exercise 4 - The Gas-Phase Reaction with QM Arg90</H3>
+<HR noshade>
+
+<p>
+The final simulation to run is the calculate the reaction energies for going
+from chorismate to prephenate in the gas-phase, while
+bound to a solitary Arg90 residue (modelled using QM).
+</p>
+
+<p>
+The input script is qm_r90qm.inp. You will need to modify it to set the R variable in the 
+beginning to do the calculation for the values of the reaction coordinate that correspond to the reactant (-1.8), 
+transition state (-0.3) and product (1.8). Do this by editing the file by typing <tt>write qm_r90qm.inp</tt> and
+saving three different files, one for each of the three values of the reaction coordinate.
+</p>
+
+<p>
+For each of the three files, run a CHARMM simulation. Do this by typing;
+
+<pre>
+./charmm < FILENAME.inp > FILENAME.log
+</pre>
+
+where FILENAME is the name of the file, e.g. if you have named the file for the reactant <tt>qm_r90qm_-1.8.inp</tt>,
+then you would need to type;
+
+<pre>
+./charmm < qm_r90qm_-1.8.inp > qm_r90qm_-1.8.log
+</pre>
+</p>
+
+</BODY>
+</HTML>

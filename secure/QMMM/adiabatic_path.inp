@@ -1,0 +1,122 @@
+* Chorismate mutase with chorismate
+******
+* Run adiabatic mapping: series of minimizations along reaction coordinate
+* TOLG=0.05, stepsize=0.3
+! Starts from app. TS, runs backwards to -1.8 (chorismate) and forwards to 1.8 (prephenate)
+
+bomlev -2
+
+! Read in topology files
+! Standard topology file for proteins
+read rtf card name top_all22_prot.inp
+
+! Topology file of ligand (chorismate)
+read rtf card name chor.rtf append
+
+! Patches for neutralized Arg, Glu, Lys & Asp
+read rtf card name res_neutral.rtf append
+
+! Read in parameter files
+! Standard parameter file for protein
+read para card name par_all22_prot.inp
+
+! Parameter file for ligand (chorismate)
+read para card name chor.prm append
+
+! Read PSF file of 25 Ang sphere of solvated CM with chorismate
+read psf card name cmchor_25.psf
+
+! Read coordinates for minimized TS structure 
+!! CHANGE ACCORDING TO CHOSEN STRUCTURE !!
+!!  AND ALSO ANOTHER TIME BELOW !!
+read coor card name min_ts35.crd
+
+! Define 'buffer' region: atoms further than 15 Ang from central atom
+define buffer select (.not. (atom CH 1 C5 .around. 15.0)) end
+
+! Fix 'buffer' region:
+cons fix select buffer end
+
+! Set QM-region (chorismate only), define method and charge
+QUANTUM SELE SEGID CH END - 
+   REMO AM1 ITRM 1000 CHARGE -2.0 EXGR
+
+! Calculate energy of TS structure
+ENER ATOM FSHIFT CDIE VDW VSHIFT -
+     CUTNB 99.0 CTOFNB 98.5 CTONNB 97.5  WMIN 1.5  EPS 1.0
+
+
+! Start backward adiabatic mapping until rc=-1.8
+set R -0.3
+
+LABEL L1
+
+! set restraint: d(C-O3) - d(C3-C9) with force constant 2000 kcal/mole.Ang^2
+RESDISTANCE RESET KVAL 2000.0 RVAL @R -
+    1.0 CH 1 C CH 1 O3 -1.0 CH 1 C3 CH 1 C9
+
+
+! Run adjusted-basis Newton-Rapson (ABNR) minimization
+! Cut-off distances set outside sphere: no cut-off of non-bonded interactions
+MINI ABNR NSTE 2500 NPRI 20 TOLG 0.05 ATOM FSHIFT CDIE VDW VSHIFT -
+     CUTNB 99.0 CTOFNB 98.5 CTONNB 97.5  WMIN 1.5  EPS 1.0
+
+PRINT RESDISTANCES
+
+! calculate and print mulliken charges
+MULLiken
+
+
+! write out crd and pdb of minimized conformation
+OPEN WRITE UNIT 25 CARD NAME "am1_rc@R.crd"
+WRITE COOR UNIT 25 CARD
+CLOSE UNIT 25
+
+OPEN WRIT UNIT 25 CARD NAME "am1_rc@R.pdb"
+WRITE COOR PDB UNIT 25 CARD
+CLOSE UNIT 25
+
+DECR R by 0.3
+IF R GE -1.8 GOTO L1
+
+! Start forward adiabatic mapping until rc=1.8
+! Again, read coordinates of minimized TS structure
+!! CHANGE ACCORDING TO CHOSEN STRUCTURE !!
+read coor card name min_ts35.crd
+
+set R 0.0
+
+LABEL L2
+
+! set restraint: d(C-O3) - d(C3-C9) with force constant 2000 kcal/mole.Ang^2
+RESDISTANCE RESET KVAL 2000.0 RVAL @R -
+    1.0 CH 1 C CH 1 O3 -1.0 CH 1 C3 CH 1 C9
+
+! Run adjusted-basis Newton-Rapson (ABNR) minimization
+! Cut-off distances set outside sphere: no cut-off of non-bonded interactions
+MINI ABNR NSTE 2500 NPRI 20 TOLG 0.05 ATOM FSHIFT CDIE VDW VSHIFT -
+     CUTNB 99.0 CTOFNB 98.5 CTONNB 97.5  WMIN 1.5  EPS 1.0
+
+PRINT RESDISTANCES
+
+! calculate and print mulliken charges
+MULLiken
+
+
+! write out crd and pdb of minimized conformation
+OPEN WRITE UNIT 25 CARD NAME "am1_rc@R.crd"
+WRITE COOR UNIT 25 CARD
+CLOSE UNIT 25
+
+OPEN WRIT UNIT 25 CARD NAME "am1_rc@R.pdb"
+WRITE COOR PDB UNIT 25 CARD
+CLOSE UNIT 25
+
+INCR R by 0.3
+IF R LE 1.8 GOTO L2
+
+
+STOP
+
+
+

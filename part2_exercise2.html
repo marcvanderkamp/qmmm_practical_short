@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 2: Analysis of the Results</H2>
+<H3>Exercise 2 - Gas-Phase Reaction</H3>
+<HR noshade>
+
+<p>
+The next step is to look at the QM energies of the reaction from 
+chorismate to prephenate in the gas-phase.  
+</p>
+
+<p>
+The energies should already be present in <b>energies.txt</b>, and thus loaded into the spreadsheet in the previious step. 
+</p>
+
+<p>
+<b>IF you are interested</b>, the energies were calculated in Part 1, exercise 2, and are in <t>qmonly_ener.log</t>.
+Note that in this case, the energies will be printed in the correct order
+(so from -1.8, through 0.0, up to +1.8)
+</p>
+
+<p>
+You can extract the minimised QM energy of the reaction, either by using grep; 
+
+<pre>
+grep "ENER QUANTM>" qmonly_ener.log
+</pre>
+
+or by extracting values manually.
+</p>
+
+<p>
+Once the values are in your spreadsheet, calculate the relative 
+energies (as you did in <a href="part2_exercise1.html">exercise 1</a>). Plot the relative energies
+on the same graph that you produced in <a href="part2_exercise1.html">exercise 1</a>. Calculate the stabilisation 
+energy (relative QM gas-phase energy from this step minus 
+relative QM/MM energy from <a href="part2_exercise1.html">exercise 1</a>). The stabilisation energy
+is the difference between the reaction energy for the gas-phase
+reaction and the reaction energy for the enzyme catalysed reaction.
+The stabilisation energy shows by how much the enzyme is 
+stabilising the reaction, and which parts of the reaction 
+are being stabilised.
+</p>
+
+<p>
+Plot the stabilisation energy against the reaction coordinate. Does your graph show support for 
+the hypothesis that chorismate mutase catalyses the reaction by 
+stabilising the transition state? 
+</p>
+
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 1: QM/MM Simulations</H2>
+<H3>Exercise 1 - Enzyme Catalysed Reaction with MM Arg90</H3>
+<HR noshade>
+
+<p>
+Run a series of minimisations along the reaction coordinate
+of the enzyme-catalysed reaction using the input script
+<b>adiabatic_path.inp</b>. You will need to modify this
+input script (TWICE!) so that it uses the starting structure
+that you chose. <b>Comments (lines starting with "!!") in the
+input script will guide you.</b></br> 
+You can edit the input script by typing:
+
+<pre>
+write adiabatic_path.inp
+</pre>
+</p>
+
+<p>
+You will run this minimisation on your desktop, using CHARMM.
+To run the simulation, type;
+
+<pre>
+./charmm < adiabatic_path.inp > adiabatic_path.log
+</pre>
+
+This will produce an output file called "adiabatic_path.log"
+which contains the output of the simulation. Additional structure
+files will also be created that represent snapshots along the 
+reaction.
+</p>
+
+<p>
+The minimisations should take about 10-20 minutes to run. You should move
+on to the next exercise while this is running. While the minimisation
+is running, you won't be able to type into the command window. You must 
+open a new command window to allow you to move on to the next section.
+</p>
+
+<p>
+CHARMM will let you know if there are any problems running the simulation by printing a skull and 
+crossbones at the bottom of the output file. If you don't see
+the skull and crossbones, then the simulation probably worked!
+</p>
+
+</BODY>
+</HTML>

@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<A NAME="begin">
+<HR noshade>
+<H2>The CHARMM QM/MM Molecular Dynamics Program</H2>
+<HR noshade>
+
+<P>
+To run this practical you will need to use the CHARMM QM/MM molecular dynamics
+program (see <a href="http://www.charmm.org">www.charmm.org</a>). CHARMM is a very
+powerful program that is used every day in the Centre for Computational Chemistry
+to investigate enzyme reaction mechanisms.
+</p>
+
+<p>
+CHARMM is a command line program, meaning that you run it from a command line,
+passing it an input file, and it will then write an output file. You run
+CHARMM via the command;
+</p>
+
+<p>
+<tt>
+charmm < inputfile.inp > outputfile.log
+</tt>
+</p>
+
+<p>
+Do NOT write
+</p>
+<p>
+<tt>
+charmm < inputfile.inp > inputfile.inp
+</tt>
+</p>
+
+<p>
+as this will overwrite your input file! If you do this you will then need
+to ask a demonstrator to help you restore your original file.
+</p>
+
+<p>
+If something is wrong with the input file, or something goes wrong while
+running CHARMM, then the program will exit, and a skull and crossbones
+will be printed at the end of the output file. Please always check
+to see there isn't a skull and crossbones at the end of your files,
+because if there is, then there is probably a typo in your script,
+or CHARMM is just having a bad day ;-).
+</p>
+
+<p>
+The full documentation for CHARMM can be found 
+<a href="http://www.charmm.org/documentation/c32b2/index.html">here</a>.
+You will mainly be using the following commands in this practical;
+
+<ul>
+<li><a href="http://www.charmm.org/documentation/c32b2/minimiz.html">MINI (minimise)</a></li>
+<li><a href="http://www.charmm.org/documentation/c32b2/qmmm.html">QUANTUM</a></li>
+<li><a href="http://www.charmm.org/documentation/c32b2/select.html">SELE (selection)</a></li>
+</ul>
+
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+* Chorismate mutase with chorismate
+******
+* Calculation of AM1 energies of QM-atoms only, with Arg90 side chain included
+*
+
+! This script is for only one structure, set R to read in desired one.
+
+bomlev -2
+
+set R -0.3
+
+! Read in topology files
+! Standard topology file for proteins
+read rtf card name top_all22_prot.inp
+
+! Topology file of ligand (chorismate)
+read rtf card name chor.rtf append
+
+! Patches for neutralized Arg, Glu, Lys & Asp
+read rtf card name res_neutral.rtf append
+
+!! ## Add link-atom atom-type - do this by uncommenting
+!! ## the below five lines. These lines define a new
+!! ## atom type for link atoms (called 'QQ'), and gives
+!! ## the new atom type a mass of 1.008. (why do we do that?)
+!read rtf card append
+!* Add atom-type for link-atoms
+!22 2
+!MASS  200  QQ    1.00800  H ! Link atom for QM/MM
+!end
+
+! Read in parameter files
+! Standard parameter file for protein
+read para card name par_all22_prot.inp
+
+! Parameter file for ligand (chorismate)
+read para card name chor.prm append
+
+!! ## Read parameters for link-atom - do this by
+!! ## uncommenting the below line. Look at this file.
+!! ## Can you work out what information is contained in 
+!! ## this file?
+!read para card name linkatom27.prm append
+
+! Read PSF file of 25 Ang sphere of solvated CM with chorismate
+read psf card name cmchor_25.psf
+
+!! ## Add link-atom - do this by uncommenting the
+!! ## below line. This line adds the link atom 
+!! ## (can you work out where?)
+!ADDLinkatom QQ90 MB 90 CD MB 90 CG
+
+!! ## Select the atoms that are in the QM region. The below
+!! ## lines select only the chorismate (SEGID CH - remember VMD?).
+!! ## You will need to change these lines so that the right
+!! ## atoms from the sidechain of Arg90 are included as well.
+!! ## As a guide, you used the link atom to replace CG, so you
+!! ## only need to include the atoms from CD down (remembering
+!! ## to also include the link atom!). To help, here is the 
+!! ## command that would be needed to put chorismate and 
+!! ## the CD and link atom into the QM region;
+!! ##
+!! ## QUANTUM SELE SEGID CH -
+!! ##   .OR. (ATOM MB 90 QQ90) -
+!! ##   .OR. (ATOM MB 90 CD) END -
+!! ## REMO AM1 ITRM 1000 CHARGE ??? EXGR
+!!
+!! ## the syntax is '(ATOM SEGID RESID ATOMNAME)', where
+!! ## SEGID is the ID of the segment identification (use VMD to see this),
+!! ## RESID is the number of the residue, and ATOMNAME is the name
+!! ## of the atom. The last line contains keywords that
+!! ## are used to control the QM/MM simulation setup. You may recognise
+!! ## 'AM1' - this is telling charmm to use the AM1 Hamiltonian.
+!!
+!! ## Use VMD to help you get the atom names of the atoms that you
+!! ## want to select. Also, ensure you choose the right **CHARGE**.
+!! ## The charge of the chorismate on its own is -2.0. What will
+!! ## be the charge of the chorismate plus Arg90?
+
+!! ## Set QM-region (chorismate only), define method and charge
+!! ## This needs to be changed to select chorismate + Arg90
+
+QUANTUM SELE SEGID CH -
+   .OR. (ATOM MB 90 QQ90) -
+   .OR. (ATOM MB 90 CD) END -
+REMO AM1 ITRM 1000 CHARGE ??? EXGR
+
+! read minimized CM+chorismate conformation
+read coor card name qmmm_am1r90_rc@R.crd
+    
+! Do energy calculation
+ENER ATOM FSHIFT CDIE VDW VSHIFT -
+     CUTNB 99.0 CTOFNB 98.5 CTONNB 97.5  WMIN 1.5  EPS 1.0
+
+!! ## Delete all MM atoms - at the moment it deletes everything
+!! ## that is *not* chorismate. You will need to change this
+!! ## so that it deletes everything that is *not* chorismate
+!! ## nor the atoms in Arg90 that are part of the QM region, 
+!! ## e.g. if only the CD and link atoms were in the QM
+!! ## region, then the command should be changed to read;
+!! ## 
+!! ## DELE ATOM SELE .NOT. (SEGID CH -
+!! ##   .OR. (ATOM MB 90 QQ90) -
+!! ##   .OR. (ATOM MB 90 CD)) END
+!! ##
+DELE ATOM SELE .NOT. (SEGID CH -
+  .OR. (ATOM MB 90 QQ90) -
+  .OR. (ATOM MB 90 CD)) END
+
+! write out crd and pdb of QM-region only
+OPEN WRITE UNIT 25 CARD NAME "qm_am1r90_rc@R.crd"
+WRITE COOR UNIT 25 CARD
+CLOSE UNIT 25
+
+
+STOP
+
+
+

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 2: Analysis of the Results</H2>
+<H3>Exercise 4 - Gas phase reaction with bound solitary Arg90 (QM)</H3>
+<HR noshade>
+
+<p>
+In exercises <a href="part2_exercise1.html">1</a> and 
+<a href="part2_exercise2.html">2</a>, you calculated stabilisation energies by comparing the 
+reaction profile of the reaction of chorismate to prephenate in the enzyme
+against the reaction in the gas phase. To provide a similar comparison
+for the reaction of chorismate to prephenate in the enzyme with a QM Arg90,
+it is necessary to calculate the reaction profile of the gas phase reaction
+bound next to a solitary QM Arg90.
+</p>
+
+<p>
+Extract the total energies of the reactant, transition
+state and product via 
+</p>
+
+<tt>
+grep "ENER QUANTM>" &lt;output_file_name&gt;.log
+</tt>
+
+<p>
+(where
+&lt;output_file_name&gt;.log is the name of the output
+files you have used in <a href="part1_exercise4.html">part 1, exercise 4</a>, e.g.
+<tt>qm_r90qm_-1.8.log</tt>). Place these
+energies into your spreadsheet and calculate relative energies as
+in <a href="part2_exercise1.html">Part 2, exercise 1</a>. Plot these relative energies on the 
+graph produced in <a href="part2_exercise1.html">Part 2, exercise 1</a>.
+</p>
+
+<p>
+Calculate the stabilisation energy (gas-phase with QM Arg90 relative
+energy minus enzyme with QM Arg90 relative energy).  Plot the stabilisation
+energy on the graph you produced in <a href="part2_exercise2.html">Part 2, exercise 2</a>. 
+How does the stabilisation 
+compare to that calculated in <a href="part2_exercise2.html">Part 2, exercise 2</a>. What does this indicate 
+about the role of Arg90 during catalysis.  Include your reasoning.
+</p>
+
+
+</BODY>
+</HTML>

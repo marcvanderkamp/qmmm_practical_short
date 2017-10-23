@@ -1,0 +1,8 @@
+The .htaccess file contains the location of the password, which is in the .htpasswd file.
+You must set the path to the install path of this file.
+
+The set username and password are
+
+cccpractical
+chorismate
+

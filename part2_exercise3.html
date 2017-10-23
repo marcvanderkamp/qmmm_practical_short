@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 2: Analysis of the Results</H2>
+<H3>Exercise 3 - Enzyme Catalysed Reaction with QM Arg90</H3>
+<HR noshade>
+
+<p>
+In <a href="part1_exercise1.html">exercise 1 of the first session</a>
+you simulated the reaction of chorismate to prephenate while bound
+to the enzyme chorismate mutase.
+</p>
+
+<p>
+In <a href="part1_exercise2.html">exercise 2 of the first session</a>
+you repeated the simulation, but this time, one of the residues of
+chorismate mutase (Arg90) was modelled using QM, rather than MM.
+</p>  
+
+<p>
+In this exercise you will calculate the reaction profile when Arg90 
+in chorismate mutase is modelled using QM.
+</p>
+
+<p>
+Extract the total energy of the reactant, transition state and product structures by using
+
+<pre>
+grep "ENER&gt;" qmmm_r90qm_reactant.log
+</pre>
+
+<pre>
+grep "ENER&gt;" qmmm_r90qm_ts.log
+</pre>
+
+<pre>
+grep "ENER&gt;" qmmm_r90qm_product.log
+</pre>
+
+</p>
+
+<p>Place the energies
+in your spreadsheet, and calculate the relative energies,
+as in <a href="part2_exercise1.html">part 2, exercise 1</a>. Plot the relative energies
+on the same graph you produced in <a href="part2_exercise1.html">part 2, exercise 1</a>. 
+</p>
+
+</BODY>
+</HTML>

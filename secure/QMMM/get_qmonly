@@ -1,0 +1,7 @@
+list="-1.8 -1.5 -1.2 -0.9 -0.6 -0.3 0.0 0.3 0.6 0.9 1.2 1.5 1.8"
+for rc in $list; do
+ ./get_qmonly.py am1_rc${rc}.crd > qmonly_rc${rc}.crd
+done
+
+cp qmonly_rc0.0.crd qmonly_rc0.crd
+

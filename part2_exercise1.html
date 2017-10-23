@@ -1,0 +1,184 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 2: Analysis of Results</H2>
+<H3>Exercise 1 - Enzyme Catalysed Reaction</H3>
+<HR noshade>
+
+<p>
+You can use VMD to visualise this reaction. Open up
+a new VMD window. Now you must tell VMD to change into the directory that contains
+your simulation output files. Find the VMD command window
+(the one that has <tt>VMD&gt;</tt> prompt). Change directory
+by typing
+</p>
+
+<tt>
+cd O:/Downloads/qmmm/QMMM
+</tt>
+
+<p>
+This above command assumes your files are in O:\Downloads\qmmm\QMMM.
+If they are not, you will need to use the directory you are using above.
+</p>
+
+<p>
+Once you have changed into the right directory, you can see the files
+by typing <tt>dir</tt>. If your files are listed, then you are in
+the right directory. If not, then get a demonstrator to help you.
+</p>
+
+<p>
+You can now play the reaction by typing
+</p>
+
+<tt>
+play reaction.vmd
+</tt>
+
+<p>
+within the VMD command window (the one with
+<tt>VMD&gt;</tt> in it). This will load up all of the snapshots for
+each value of the reaction coordinate from your minimisation
+calculations. These will be loaded up as a movie, allowing you
+to play the reaction backwards and forwards (use the play icons
+at the bottom of the VMD main window). Describe the
+structural changes that you observe during the reaction. Are
+there any structural changes in the enzyme?
+</p>
+
+<p>
+This simulation calculated the reaction energy profile by performing
+an energy minimisation at several different values of the reaction
+coordinate. The values used were -1.8, -1.5, -1.2, -0.9, -0.6, -0.3,
+0.0, 0.3, 0.6, 0.9, 1.2, 1.5 and 1.8. This maps from chorismate
+ (at R = -1.8) through the transition state to prephrenate (
+at R = +1.8).
+</p>
+
+<p>
+However, the minimisations 
+were not performed in this order (see slides).
+To get the energies in the order of the forward reaction (from -1.8 to 1.8), you can run:
+</p>
+<tt>
+sh get_energies
+</tt>
+
+<p>
+
+<p>
+This will generate a file called <b>energies.txt</b>. 
+</p>
+<p>
+Load this file into a spreadsheet (Data->From Text) to get a table with: reaction coordinate (R) values, number of minimisation steps,
+total QM/MM energies.
+</p>
+
+<p>
+Calculate relative energies by setting chorismate (R = -1.8) to zero
+(subtract the energy of chorismate from the energies from every other
+value of R)
+</p>
+
+<p>
+Plot the potential energy profile (the relative energies vs.
+R value).
+</p>
+
+<p>
+
+</p>
+<p>
+ 
+</p>
+
+
+<b>IF you are interested</b>, you can find out the order of the minimisations 
+taking a look at the <b>adiabatic_path.log</b> output file. Look 
+for the lines that look like;
+</p>
+
+<tt>
+CHARMM>    set R -0.3 <br>
+Parameter: R <- "-0.3"
+</tt>
+
+<p>
+These lines show how the value of the reaction coordinate (represented
+by "R") is being set to a particular value, in this case -0.3.
+</p>
+
+<p>
+You may also need to look for lines that look like this;
+</p>
+
+<tt>
+CHARMM>    DECR R by 0.3 <br>
+Parameter: R <- "-0.6"
+</tt>
+
+<p>
+In this case, the reaction coordinate (R) is being decremented by 0.3, which (given
+that is was -0.3) means that R is now equal to -0.6.
+</p>
+
+<p>
+After each point where R is set to a new value, CHARMM then performed an energy minimisation.
+There were several steps of minimisation. The final, minimum energy for that value of R
+is reported on lines that look like this;
+</p>
+
+<tt>
+<pre>
+ABNR MIN: Cycle      ENERgy      Delta-E         GRMS    Step-size<br>
+ABNR INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers<br>
+ABNR EXTERN:        VDWaals         ELEC       HBONds          ASP         USER<br>
+ABNR CONSTR:       HARMonic    CDIHedral          CIC     RESDistance       NOE<br>
+ABNR QUANTUM:        QMELec        QMVDw  <br>
+ ----------       ---------    ---------    ---------    ---------    ---------<br>
+ABNR>       36  -3750.43050      0.14325      0.03280      0.00232<br>
+ABNR INTERN>      118.90704    207.98571     13.32543    367.44882      5.80119<br>
+ABNR EXTERN>     -544.62742  -3466.08527      0.00000      0.00000      0.00000<br>
+ABNR CONSTR>        0.00000      0.00000      0.00000      0.48682      0.00000<br>
+ABNR QUANTM>     -426.67180    -27.00102<br>
+ ----------       ---------    ---------    ---------    ---------    ---------<br>
+</pre>
+</tt>
+
+<p>
+The line that starts with <tt>ABNR&gt;</tt> is the interesting one - this has the number
+of energy minimisation steps (in this case 36), then the final minimum QM/MM energy of the 
+value of the system (in this case -3750.43050) as the first two numbers.
+The unit of energy used in CHARMM is <b>kcal/mole</b>.
+</p>
+
+<p>
+Extract the total QM/MM energy and the number of minimisation steps, 
+for each value of the reaction coordinate (R), from the output file from 
+step 1.3 (adiabatic_path.log). You can either do this by hand, or you
+can use the command;
+</p>
+
+<tt>
+grep "ABNR&gt;" adiabatic_path.log
+</tt>
+
+<p>
+to print all of the lines that start with <tt>ABNR&gt;"</tt>. Remember though
+that these lines are printed in the order that the minimisations were performed,
+and <b>do not</b> appear in the order -1.8,-1.5,...,0.0,...1.5,1.8.
+</p>
+
+
+</body>
+
+</html>

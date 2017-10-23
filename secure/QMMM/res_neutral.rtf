@@ -1,0 +1,55 @@
+* Patches to make residues in the buffer artificially neutral
+*
+   22     1
+
+! Patch to make the ARGs neutral
+PRES ARGB         0.00 ! NE,NH1 have now the charge equal to NH1.    
+GROUP                  ! HD1,HD2,HH11,HH12,HH21,HH22 have now the          
+ATOM CD   CT2    -0.18 ! charge equal to H. 
+ATOM HD1  HA      0.09 ! CD,HD1,HD2 have now the charge equal to
+ATOM HD2  HA      0.09 ! the typically values for an aliphatic CH2. 
+ATOM NE   NC2    -0.47 ! CZ has the value of charge that allow the
+ATOM HE   HC      0.31 ! total group to be neutral
+ATOM CZ   C      -0.14
+ATOM NH1  NC2    -0.47
+ATOM HH11 HC      0.31
+ATOM HH12 HC      0.31
+ATOM NH2  NC2    -0.47
+ATOM HH21 HC      0.31
+ATOM HH22 HC      0.31                                   
+                                              
+                                                   
+! Patch to make the ASPs neutral
+PRES ASPB         0.00  !  
+GROUP                   !  
+ATOM CB   CT2     0.00  ! 
+ATOM HB1  HA      0.09  ! 
+ATOM HB2  HA      0.09  !    
+ATOM CG   CC      0.62  !              
+ATOM OD1  OC     -0.40  
+ATOM OD2  OC     -0.40 
+ 
+  
+! Patch to make the GLUs neutral
+PRES GLUB         0.00 ! 
+GROUP                  ! 
+ATOM CG   CT2     0.00 ! 
+ATOM HG1  HA      0.09 ! 
+ATOM HG2  HA      0.09 ! 
+ATOM CD   CC      0.62 ! 
+ATOM OE1  OC     -0.40 !
+ATOM OE2  OC     -0.40 !
+
+
+! Patch to make the LYSs neutral
+PRES LYSB         0.00 ! CE,HE1,HE2 have now the charge to
+GROUP                  ! to the typically values for an aliphatic CH2.
+ATOM CE   CT2    -0.18 ! NZ has now the charge more similar to NH1
+ATOM HE1  HA      0.09 ! HZ1,HZ2,HZ3 have now the charges (all equal as
+ATOM HE2  HA      0.09 ! in the original) to reach the neutrality.
+ATOM NZ   NH3    -0.48 ! 
+ATOM HZ1  HC      0.16 ! 
+ATOM HZ2  HC      0.16
+ATOM HZ3  HC      0.16
+
+

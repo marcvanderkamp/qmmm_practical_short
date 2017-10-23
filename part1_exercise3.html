@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>Investigating Enzyme Catalysis</TITLE>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<STYLE TYPE="text/css">
+    BODY {background: url(pics/TSpic.jpg)}
+</STYLE>
+</HEAD>
+<BODY>
+
+<HR noshade>
+<H2>Part 1: QM/MM Simulations</H2>
+<H3>Exercise 2 - Gas Phase Reaction</H3>
+<HR noshade>
+
+<p>
+The next step is to calculate the reaction energies for going from 
+chorismate to prephenate in the gas-phase. To do this, you must 
+extract the coordinates of the substrate from the minimised 
+conformations obtained from exercise 1 (which means that the
+simulation run in exercise 1 <b>must</b> have finished successfully
+before you can perform this exercise!)
+</p>
+
+<p>
+Do this by running the command;
+
+<pre>
+sh get_qmonly
+</pre>
+</p>
+
+<p>
+Run energy calculations of QM atoms only along the profile using the command; 
+
+<pre>
+./charmm < qmonly_ener.inp > qmonly_ener.log
+</pre>
+
+(This will take less than a minute)
+</p>
+
+</BODY>
+</HTML>
