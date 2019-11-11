@@ -48,17 +48,17 @@ You will be using the MSYS command line environment to run the CHARMM program an
 </p>
 <p>
     For Windows 10:
-Start MSYS by searching for "msys" with the looking-glass button, which will bring up MSYS 1.0.11; click on this "Desktop App".
+Start MSYS by searching for "MSYS" (with the looking-glass button), which will bring up MSYS 1.0.11; click on this "Desktop App".
 </p>
 <p>
     For Windows 7 or similar:
     You can start MSYS by pressing the Start Button, followed by Run...
-</p>
-<p>
 Then type:
 </p>
 <pre>  C:/msys/1.0/msys.bat
 </pre>
+    </p>
+<p>
 
 <p>
 In the MSYS window, change into the directory containing the files for this first part of the practical.
@@ -76,18 +76,20 @@ directory.
 A starting structure for this practical can be found on <a href="structures.html">this page</a>. 
 This page contains several snapshot structures from a molecular dynamics simulation of 
 chorismate mutase. Each snapshot is numbered. Choose one of these snapshots (making 
-sure to choose a different number than your neighbours) and download
-the min_ts&lt;favourite number&gt;.crd and min_ts&lt;favourite number&gt;.pdb files
-to the top directory for the practical (e.g. /o/Downloads/qmmm/QMMM).
+sure to choose a different number than your neighbours) and download <b>BOTH<\b>
+    the <tt>min_ts&lt;favourite number&gt;.crd</tt> and <tt>min_ts&lt;favourite number&gt;.pdb</tt> files
+to the main directory for the practical (e.g. /o/Downloads/qmmm/QMMM).
 </p>
 
 
 <p>
 The starting structures were obtained from a simulation of the 
 transition state of the enzyme-catalysed reaction. The starting 
-structure is a snapshot from that simulation. Use VMD to visualise the 
+structure is a (energy-mimised) snapshot from that simulation. 
+<p/>
+<p>Use VMD to visualise the 
 structure of the enzyme and transition state. Do this by loading 
-the min_ts&lt;favourite number&gt;.pdb file into VMD, and use the 
+the <tt>min_ts&lt;favourite number&gt;.pdb</tt> file into VMD, and use the 
 "Graphical Representations" form (under Graphics|Representations) 
 to highlight chorismate mutase (type <tt>segid MA MB MC</tt>
 into the "selected atoms" box of the "Graphical Representations" window), 
@@ -99,8 +101,15 @@ the Arg90 residue in the active site
 into the "selected atoms" box).  Identify the bonds 
 that correspond to the reaction coordinate.
 </p>
-
-<h3>If you need help with VMD, then please read the information on
+<ol>
+- Start VMD (search for "VMD" and click on the App to open)
+- In the main VMD menu, choose: File --> New Molecule.
+- Select <tt>min_ts&lt;favourite number&gt;.pdb</tt>. Then press "Load".
+- In the main menu, choose: Graphics --> Representations.
+- See the suggestions above for changing/adding representations.
+ </ol>
+    
+<h3>If you need further help with VMD, then please read the information on
     the <a href="tech_vmd.html">VMD help page.</a></h3>
 
 </BODY>
